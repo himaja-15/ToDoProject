@@ -1,0 +1,125 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+          <h1> To-Do Application </h1>
+      </div>
+    </div>
+
+    <form [formGroup]="todoForm">
+        <div class="input-group mb-3">
+            <input formControlName="item" type="text" class="form-control" #taskInput placeholder="Add To-Do Item" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button *ngIf="!isEditEnabled && !isImpEditEnabled" (click)="addTask(taskInput)" class="btn btn-outline-secondary" type="button" id="button-addon2">ADD</button>
+              <button *ngIf="!isEditEnabled && !isImpEditEnabled" (click)="impTask(taskInput)" class="btn btn-outline-secondary" type="button" id="button-addon2">IMP</button>
+
+              <button *ngIf="isEditEnabled" (click)="updateTask()" class="btn btn-outline-secondary" type="button" id="button-addon2">UPDATE</button>
+              <button *ngIf="isImpEditEnabled" (click)="updateimpTask()" class="btn btn-outline-secondary" type="button" id="button-addon2">UPDATE</button>
+
+            </div>
+        </div>
+        <div class="rows">
+            <div class="table1">
+        <table class="tasksTable">
+            <div class="con1">
+            <thead>
+                <div class="title">
+                    <tr>
+                        <th>To-Do list</th>
+                    </tr>  
+
+                </div>
+            </thead>
+            <tbody>
+                <div class="table-row" *ngIf="imp?.length">
+
+                    <tr  *ngFor="let item of imp; let a = index">
+                        <div class="row1">
+                            <div class="col">
+                                <td>
+                                    {{item.description}}
+        
+                                </td>
+    
+                            </div>
+                              
+                           <div class="col1">
+                            <td>
+                                <button class="btn btn-primary btn-xs" (click)="editimpTask(item,taskInput,a)"> Edit </button>
+                            </td>
+                         
+                            <td>
+                                <button class="btn btn-warning btn-xs" (click)="doneimpTask(a)"> Done</button>
+                            </td>
+                        
+                            <td>
+                                <button class="btn btn-danger btn-xs" (click)="deleteimpTask(a)"> Delete </button>
+                            </td>
+    
+                           </div>
+                        </div>
+                    </tr>
+                </div>
+                <div>
+                    <tr *ngFor="let item of tasks; let i = index">
+                        <div class="row1">
+                            <div class="col">
+                                {{item.description}}
+                            </div>
+                            <div class="col1">
+                                <td>
+                                    <button class="btn btn-primary btn-xs" (click)="editTask(item,taskInput,i)"> Edit </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning btn-xs" (click)="doneTask(i)"> Done</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-xs" (click)="deleteTask(i)"> Delete </button>
+                                </td>
+
+                            </div>
+                        </div>    
+                    </tr>
+                </div>
+            </tbody>
+        </div>
+        </table>
+        </div>
+        <div class="table2">
+        <table class="comptable">
+            <thead>
+                <div class="title">
+                    <tr>
+                        <th>Completed Tasks</th>
+                    </tr>
+
+                </div>
+               
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of done; let i = index">
+                    <div class="row2">
+                        <div class="col2">
+                            {{item.description}}
+    
+                        </div>
+                        <div class="col3">
+                            <td>
+                                <button class="btn btn-danger btn-xs" (click)="deleteTaskdone(i)"> Delete </button>
+                            </td>
+                        </div> 
+
+                    </div>
+                    
+                </tr>
+            </tbody>
+        </table>
+        
+     </div>
+    </div>
+</form>
+</div>
+<!-- <nav>
+    <a routerLink="/completed-tasks" routerLinkActive="active"><button>Completed Tasks</button></a>
+</nav>
+<app-completed-tasks [parentData]="done"></app-completed-tasks>
+<router-outlet></router-outlet> -->
